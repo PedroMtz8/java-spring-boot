@@ -35,7 +35,7 @@ public class UserModel {
         this.firstName = firstName;
     }
 
-    public String getLasName() {
+    public String getLastName() {
         return lastName;
     }
 
