@@ -20,6 +20,11 @@ public class UserService {
     }
 
     public UserModel saveUser(UserModel user) {
+        UserModel existingUser = userRepository.findUserByEmail(user.getEmail());
+        if (existingUser != null) {
+            throw new RuntimeException("El usuario con el correo electrónico ya existe"); // Lanza una excepción con el mensaje personalizado
+        }
+
         return userRepository.save(user);
     }
 
