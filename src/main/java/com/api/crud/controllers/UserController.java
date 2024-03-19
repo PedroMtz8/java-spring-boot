@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,8 @@ public class UserController {
    @PostMapping
     public ResponseEntity<Object> saveUser(@RequestBody UserModel user) {
         try {
+            user.setId(UUID.randomUUID().toString());
+            System.out.println(user.toString());
             UserModel savedUser = this.userService.saveUser(user);
             return ResponseEntity.ok(savedUser); // Devolver UserModel en caso de éxito
         } catch (Exception e) {
@@ -35,6 +38,8 @@ public class UserController {
 
             // Personalizar la respuesta de error con el mensaje de error de MySQL.
             Map<String, String> errorResponse = new HashMap<>();
+            // Map<String, Integer> object = new HashMap<>();
+            // object.put("Something", 2);
             errorResponse.put("message", errorMessage);
             errorResponse.put("email", user.getEmail());
 
@@ -44,17 +49,17 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<UserModel> getUserById(@PathVariable Long id) {
+    public Optional<UserModel> getUserById(@PathVariable String id) {
         return this.userService.getById(id);
     }
 
     @PutMapping(path = "/{id}")
-    public Optional<UserModel> updateUserById(@RequestBody UserModel request, Long id) {
+    public Optional<UserModel> updateUserById(@RequestBody UserModel request, String id) {
         return this.userService.updateById(request, id);
     }
 
     @DeleteMapping(path = "/{id}")
-    public String deleteById(@PathVariable("id") Long id){
+    public String deleteById(@PathVariable("id") String id){
         boolean ok = this.userService.deleteUser(id);
         if(ok){
             return "User with id " + id + " deleted!"; 

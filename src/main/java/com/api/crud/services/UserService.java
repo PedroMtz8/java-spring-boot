@@ -28,11 +28,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public Optional<UserModel> getById(Long id) {
+    public Optional<UserModel> getById(String id) {
         return userRepository.findById(id);
     }
 
-    public Optional<UserModel> updateById(UserModel request, Long id) {
+    public Optional<UserModel> updateById(UserModel request, String id) {
         Optional<UserModel> user = userRepository.findById(id);
         user.get().setFirstName(request.getFirstName());
         user.get().setLastName(request.getLastName());
@@ -50,7 +50,7 @@ public class UserService {
         return userModel;
         } */
 
-    public Boolean deleteUser (Long id) {
+    public Boolean deleteUser (String id) {
         try {
             userRepository.deleteById(id);
             return true;

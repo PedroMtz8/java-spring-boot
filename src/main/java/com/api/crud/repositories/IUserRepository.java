@@ -8,7 +8,7 @@ import org.springframework.stereotype.*;
 import com.api.crud.models.UserModel;
 
 @Repository
-public interface IUserRepository extends JpaRepository<UserModel, Long> {
+public interface IUserRepository extends JpaRepository<UserModel, String> {
     @Query("SELECT u FROM UserModel u WHERE u.email = :email")
     UserModel findUserByEmail(@Param("email") String email);
 }

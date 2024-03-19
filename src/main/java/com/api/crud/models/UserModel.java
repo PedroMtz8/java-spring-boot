@@ -7,8 +7,8 @@ import jakarta.persistence.*;
 public class UserModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    // @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
 
     @Column
     private String firstName;
@@ -19,11 +19,11 @@ public class UserModel {
     @Column(unique = true)
     private String email;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
